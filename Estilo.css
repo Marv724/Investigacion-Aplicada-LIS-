@@ -1,53 +1,45 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: #fff;
-    margin: 0;
-    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#f3f5f7;
 }
-.header {
-    background-image: url('https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg');
-    background-size: cover;
-    background-position: center;
-    height: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+
+/* HERO */
+.hero img {
+    height: 320px;
+    object-fit: cover;
+    filter: brightness(65%);
 }
-.header h1 {
-    font-size: 3rem;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+
+/* SECCIONES */
+.section {
+    padding: 60px 20px;
 }
-.navbar-custom {
-    background: #333;
+
+/* CARD */
+.card-modern {
+    background:white;
+    border-radius:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+    padding:25px;
 }
-.navbar-custom a {
-    color: white;
+
+/* GALERIA */
+.gallery img {
+    height:220px;
+    object-fit:cover;
+    border-radius:14px;
 }
-.content-section {
-    padding: 40px 20px;
+
+/* TABLA */
+table th, table td {
+    white-space: nowrap;
+    font-size: 0.9rem;
 }
-.form-card {
-    background: #fafafa;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 20px;
-}
-.btn-reservar {
-    background: #d9534f;
-    color: white;
-    font-weight: bold;
-}
-.btn-reservar:hover {
-    background: #c9302c;
-    color: white;
-}
-.table-responsive {
-    margin-top: 20px;
-}
+
+/* FOOTER */
 .footer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
+    background:#111;
+    color:#bbb;
+    text-align:center;
+    padding:20px;
 }
