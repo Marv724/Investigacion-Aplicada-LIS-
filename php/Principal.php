@@ -41,7 +41,7 @@ if (isset($_GET['editar'])) {
     <title>Altavista Eventos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="Estilo.css">
+    <link href="../css/Estilo.css" rel="stylesheet" >
 </head>
 
 <body>
