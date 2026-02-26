@@ -1,5 +1,6 @@
 <?php include 'Backend.php'; ?>
 
+<!-- Para editar -->
 <?php
 $editando = null;
 $editarReserva = null;
@@ -11,6 +12,27 @@ if (isset($_GET['editar'])) {
 }
 ?>
 
+<!-- Para validar campos -->
+<?php if (isset($_SESSION['errores'])): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Datos ingresados de forma incorrecta:</strong>
+        <ul>
+            <?php foreach ($_SESSION['errores'] as $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <?php unset($_SESSION['errores']); endif; ?>
+
+<?php if (isset($_SESSION['exito'])): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= $_SESSION['exito']; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <?php unset($_SESSION['exito']); endif; ?>
+
+<!-- Pagina principal -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -126,7 +148,9 @@ if (isset($_GET['editar'])) {
                         <h5>Datos del Responsable</h5>
                         <input class="form-control mb-2" name="nombre" placeholder="Nombre completo" required>
                         <input class="form-control mb-2" name="direccion" placeholder="Dirección" required>
-                        <input type="number" class="form-control mb-3" name="telefono" placeholder="Teléfono" required>
+                        <input type="text" class="form-control mb-3" name="telefono" maxlength="8" inputmode="numeric"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" pattern="[0-9]{8}"
+                            placeholder="Teléfono" required>
 
                         <h5>Detalles del Evento</h5>
                         <select class="form-control mb-2" name="evento" required>
@@ -135,7 +159,8 @@ if (isset($_GET['editar'])) {
                             <option>Conferencia</option>
                         </select>
 
-                        <input type="number" class="form-control mb-2" name="personas" placeholder="Cantidad de personas" required>
+                        <input type="number" class="form-control mb-2" name="personas" min="1" max="150"
+                            placeholder="Cantidad de personas" required>
                         <input type="date" class="form-control mb-3" name="fecha" required>
 
                         <h5>Horarios</h5>
@@ -143,7 +168,10 @@ if (isset($_GET['editar'])) {
                         <input type="time" class="form-control mb-3" name="fin" required>
 
                         <h5>Pago</h5>
-                        <input class="form-control mb-3" name="pago" placeholder="Pago inicial / Tarjeta" required>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" name="pago" step="0.01" class="form-control" required>
+                        </div>
 
                         <h5>Requerimientos Especiales</h5>
                         <textarea class="form-control mb-3" name="requerimientos"></textarea>
@@ -257,51 +285,7 @@ if (isset($_GET['editar'])) {
         © 2026 Altavista Eventos
     </footer>
 
-    <?php if ($editarReserva): ?>
-
-        <div class="modal fade show" id="pantallaEditar" style="display:block; background:rgba(0,0,0,0.5);">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-
-                    <div class="modal-header bg-warning">
-                        <h5 class="modal-title">Editar Reserva</h5>
-                        <a href="Principal.php" class="btn-close"></a>
-                    </div>
-
-                    <form method="POST" enctype="multipart/form-data">
-
-                        <div class="modal-body">
-
-                            <input class="form-control mb-2" name="nombre" value="<?= $editarReserva['nombre'] ?>" required>
-                            <input class="form-control mb-2" name="direccion" value="<?= $editarReserva['direccion'] ?>" required>
-                            <input type="number" class="form-control mb-2" name="telefono" value="<?= $editarReserva['telefono'] ?>" required>
-
-                            <select class="form-control mb-2" name="evento">
-                                <option <?= $editarReserva['evento'] == "Boda" ? "selected" : "" ?>>Boda</option>
-                                <option <?= $editarReserva['evento'] == "Cumpleaños" ? "selected" : "" ?>>Cumpleaños</option>
-                                <option <?= $editarReserva['evento'] == "Conferencia" ? "selected" : "" ?>>Conferencia</option>
-                            </select>
-
-                            <input type="number" class="form-control mb-2" name="personas" value="<?= $editarReserva['personas'] ?>" required>
-                            <input type="date" class="form-control mb-2" name="fecha" value="<?= $editarReserva['fecha'] ?>" required>
-                            <input type="time" class="form-control mb-2" name="inicio" value="<?= $editarReserva['inicio'] ?>" required>
-                            <input type="time" class="form-control mb-2" name="fin" value="<?= $editarReserva['fin'] ?>" required>
-                            <input class="form-control mb-2" name="pago" value="<?= $editarReserva['pago'] ?>" required>
-                            <textarea class="form-control mb-2" name="requerimientos"><?= $editarReserva['requerimientos'] ?></textarea>
-                            <input type="file" class="form-control mb-2" name="documento">
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <a href="Principal.php" class="btn btn-secondary">Cancelar</a>
-                            <button type="submit" class="btn btn-warning" name="editar" value="<?= $editando ?>">Guardar Cambios</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    <?php endif; ?>
+    <?php include "PantallaEditar.php"; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

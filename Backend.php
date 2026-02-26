@@ -17,6 +17,8 @@ if (isset($_POST['crear'])) {
         move_uploaded_file($_FILES['documento']['tmp_name'], "uploads/" . $archivo);
     }
 
+    ValidarFormato();
+
     $_SESSION['reservas'][] = [
         "nombre" => $_POST['nombre'],
         "direccion" => $_POST['direccion'],
@@ -39,7 +41,7 @@ if (isset($_POST['crear'])) {
 if (isset($_GET['eliminar'])) {
     $indice = $_GET['eliminar'];
 
-    if(isset($_SESSION['reservas'][$indice])) {
+    if (isset($_SESSION['reservas'][$indice])) {
         unset($_SESSION['reservas'][$indice]);
         $_SESSION['reservas'] = array_values($_SESSION['reservas']);
     }
@@ -51,7 +53,7 @@ if (isset($_GET['eliminar'])) {
 if (isset($_POST['editar'])) {
     $indice = $_POST['editar'];
 
-    if(isset($_SESSION['reservas'][$indice])) {
+    if (isset($_SESSION['reservas'][$indice])) {
         $archivo = $_SESSION['reservas'][$indice]['documento'];
 
         if (!empty($_FILES['documento']['name'])) {
@@ -62,6 +64,8 @@ if (isset($_POST['editar'])) {
             $archivo = time() . "_" . $_FILES['documento']['name'];
             move_uploaded_file($_FILES['documento']['tmp_name'], "uploads/" . $archivo);
         }
+
+        ValidarFormato();
 
         $_SESSION['reservas'][$indice] = [
             "nombre" => $_POST['nombre'],
@@ -79,4 +83,54 @@ if (isset($_POST['editar'])) {
     }
     echo "<script>window.location='Principal.php';</script>";
     exit();
+}
+
+function PantallaEditar(){
+    
+}
+
+function ValidarFormato()
+{
+    $errores = [];
+
+    if (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/", $_POST['nombre'])) {
+        $errores[] = "Nombre inválido";
+    }
+
+    if (!preg_match("/^[0-9]{8}$/", $_POST['telefono'])) {
+        $errores[] = "Teléfono inválido";
+    }
+
+    if (!empty($errores)) {
+        $_SESSION['errores'] = $errores;
+        header("Location: Principal.php");
+        exit();
+    }
+
+    if (
+        !filter_var($_POST['personas'], FILTER_VALIDATE_INT) ||
+        $_POST['personas'] <= 0 ||
+        $_POST['personas'] > 150
+    ) {
+
+        $errores[] = "La cantidad debe ser un número entre 1 y 150.";
+    }
+
+    if ($_POST['inicio'] == $_POST['fin']) {
+        $errores[] = "La hora de inicio y fin no pueden ser iguales.";
+    }
+
+    $horaInicio = strtotime($_POST['inicio']);
+    $horaFin = strtotime($_POST['fin']);
+
+    if ($horaFin <= $horaInicio) {
+        $errores[] = "La hora de fin debe ser mayor que la hora de inicio.";
+    }
+
+    if (!empty($errores)) {
+        $_SESSION['errores'] = $errores;
+        header("Location: Principal.php");
+        exit();
+    }
+
 }
