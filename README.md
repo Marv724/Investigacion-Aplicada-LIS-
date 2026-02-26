@@ -2,4 +2,4 @@
 ## Lenguajes Interpretados en el Servidor LIS104 G01T
 
 Link es: localhost/Investigacion-Aplicada-LIS
-+{Portada de trabajo}
++[Portada de trabajo: }(Investigación aplicada 1.pdf)
