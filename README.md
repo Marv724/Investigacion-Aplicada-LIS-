@@ -8,3 +8,4 @@
 
 - 📁 **Portada**
   - [Portada de trabajo (PDF)](Investigación aplicada 1.pdf)
+  - [Infografia sobre MVC](Inforgrafia LIS.pdf)
