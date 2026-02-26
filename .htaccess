@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /Investigacion-Aplicada/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^editar/([0-9]+)$ index.php?editar=$1 [L,QSA]
+RewriteRule ^eliminar/([0-9]+)$ index.php?eliminar=$1 [L,QSA]
+RewriteRule ^$ index.php [L]

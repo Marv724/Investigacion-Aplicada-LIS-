@@ -33,7 +33,7 @@ if (isset($_POST['crear'])) {
         "documento" => $archivo
     ];
 
-    header("Location: Principal.php");
+    header("Location: /Investigacion-Aplicada/");
     exit();
 }
 
@@ -45,7 +45,7 @@ if (isset($_GET['eliminar'])) {
         unset($_SESSION['reservas'][$indice]);
         $_SESSION['reservas'] = array_values($_SESSION['reservas']);
     }
-    header("Location: Principal.php");
+    header("Location: /Investigacion-Aplicada/");
     exit();
 }
 
@@ -81,7 +81,7 @@ if (isset($_POST['editar'])) {
             "documento" => $archivo
         ];
     }
-    echo "<script>window.location='Principal.php';</script>";
+    echo "<script>window.location='/Investigacion-Aplicada/';</script>";
     exit();
 }
 
@@ -103,7 +103,7 @@ function ValidarFormato()
 
     if (!empty($errores)) {
         $_SESSION['errores'] = $errores;
-        header("Location: Principal.php");
+        header("Location: /Investigacion-Aplicada/");
         exit();
     }
 
@@ -129,7 +129,7 @@ function ValidarFormato()
 
     if (!empty($errores)) {
         $_SESSION['errores'] = $errores;
-        header("Location: Principal.php");
+        header("Location: /Investigacion-Aplicada/");
         exit();
     }
 

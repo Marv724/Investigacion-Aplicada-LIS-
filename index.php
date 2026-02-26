@@ -1,4 +1,4 @@
-<?php include 'Backend.php'; ?>
+<?php include 'php/Backend.php'; ?>
 
 <!-- Para editar -->
 <?php
@@ -41,7 +41,7 @@ if (isset($_GET['editar'])) {
     <title>Altavista Eventos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/Estilo.css" rel="stylesheet" >
+    <link href="/Investigacion-Aplicada/css/Estilo.css" rel="stylesheet">
 </head>
 
 <body>
@@ -246,8 +246,8 @@ if (isset($_GET['editar'])) {
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <a href="?editar=<?= $i ?>" class="btn btn-sm btn-warning">Editar</a>
-                                <a href="?eliminar=<?= $i ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                                <a href="/Investigacion-Aplicada/editar/<?= $i ?>" class="btn btn-sm btn-warning">Editar</a>
+                                <a href="/Investigacion-Aplicada/eliminar/<?= $i ?>" class="btn btn-sm btn-danger">Eliminar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -285,7 +285,7 @@ if (isset($_GET['editar'])) {
         © 2026 Altavista Eventos
     </footer>
 
-    <?php include "PantallaEditar.php"; ?>
+    <?php include "php/PantallaEditar.php"; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

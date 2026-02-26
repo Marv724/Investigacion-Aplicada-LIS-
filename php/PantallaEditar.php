@@ -6,7 +6,7 @@
 
                 <div class="modal-header bg-warning">
                     <h5 class="modal-title">Editar Reserva</h5>
-                    <a href="Principal.php" class="btn-close"></a>
+                    <a href="/Investigacion-Aplicada/" class="btn-close"></a>
                 </div>
 
                 <form method="POST" enctype="multipart/form-data">
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <a href="Principal.php" class="btn btn-secondary">Cancelar</a>
+                        <a href="/Investigacion-Aplicada/" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-warning" name="editar" value="<?= $editando ?>">
                             Guardar Cambios
                         </button>
